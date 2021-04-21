@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  payment_method: MyString
+  user: one
+  medicine: one
+  dose: one
+  pack: one
+  address: one
+  card: one
+
+two:
+  payment_method: MyString
+  user: two
+  medicine: two
+  dose: two
+  pack: two
+  address: two
+  card: two
