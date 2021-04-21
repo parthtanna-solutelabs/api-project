@@ -1,7 +1,7 @@
 class DosesController < ApplicationController
     before_action :authorize_request
     before_action :admin_only, only: [:index,:show,:create,:edit,:update,:destroy]
-    before_action :patient_only, only: :get_packs
+    
     def index
         @doses=Dose.all
         render json: @doses
@@ -52,18 +52,6 @@ class DosesController < ApplicationController
         @medicine_id=params[:medicine_id]
         session[:dose_id]=@dose.id
         render json: @dose, show_children: true
-      end
-
-      def admin_only
-        if !current_user.admin?
-            render json:{error:"Only admin can acccess"}, status: :unauthorized
-        end
-      end
-
-      def patient_only
-        if current_user.admin?
-            render json:{error:"Only patient can acccess"}, status: :unauthorized
-        end
       end
 
       private

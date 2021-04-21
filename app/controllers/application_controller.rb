@@ -10,6 +10,18 @@ class ApplicationController < ActionController::API
       decoded = JWT.decode(token, SECRET_KEY)[0]
       HashWithIndifferentAccess.new decoded
     end
+    def admin_only
+        
+      if !@current_user.admin?
+          render json:{error:"Only admin can acccess"}, status: :unauthorized
+      end
+    end
+
+    def patient_only
+      if @current_user.admin?
+          render json:{error:"Only patient can acccess"}, status: :unauthorized
+      end
+    end
     
     def authorize_request
         header = request.headers['Authorization']

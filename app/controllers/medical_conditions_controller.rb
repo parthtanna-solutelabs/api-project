@@ -17,15 +17,5 @@ class MedicalConditionsController < ApplicationController
     render json: @medical_condition, show_children: true
   end
   
-  def admin_only
-    if !current_user.admin?
-        render json:{error:"Only admin can acccess"}, status: :unauthorized
-    end
-  end
-
-  def patient_only
-    if current_user.admin?
-        render json:{error:"Only patient can acccess"}, status: :unauthorized
-    end
-  end
+  
 end

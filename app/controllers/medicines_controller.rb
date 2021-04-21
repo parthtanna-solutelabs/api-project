@@ -1,7 +1,7 @@
 class MedicinesController < ApplicationController
   before_action :authorize_request
   before_action :admin_only, only: [:index,:show,:create,:edit,:update,:destroy]
-  before_action :patient_only, only: :get_doses
+  
     def index
         @medicines=Medicine.all
         render json: @medicines
