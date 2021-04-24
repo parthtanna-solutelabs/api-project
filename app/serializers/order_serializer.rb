@@ -9,19 +9,20 @@ class OrderSerializer < ActiveModel::Serializer
     dose = Dose.find(object.dose_id)
     pack = Pack.find(object.pack_id)
     payment_method = object.payment_method
-    card = Card.find(object.card_id)
+    if object.card_id
+      card = Card.find(object.card_id)
+    end
     address = Address.find(object.address_id)
     return {medicine:medicine.name, dose:dose.weight, pack_size:pack.size, price:pack.price, address:address.address}
 
   end
   def card
     s1="XXXXXXXXXXXX"
-    card = Card.find(object.card_id)
-    if card.user_id != 1
-      return {card_number:s1 + card.card_number[-4..-1]}
+    if object.card_id
+      card = Card.find(object.card_id)
+      {card_number:s1 + card.card_number[-4..-1]}
     else
-      return {card_number:"--"}
+      {card_number:"--"}
     end
   end
-
 end

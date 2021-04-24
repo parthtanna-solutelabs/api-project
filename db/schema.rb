@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_19_121527) do
+ActiveRecord::Schema.define(version: 2021_04_24_082222) do
 
   create_table "addresses", force: :cascade do |t|
     t.text "address"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2021_04_19_121527) do
     t.integer "dose_id"
     t.integer "pack_id"
     t.integer "address_id"
-    t.integer "card_id", default: 0
+    t.integer "card_id"
     t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["card_id"], name: "index_orders_on_card_id"
     t.index ["dose_id"], name: "index_orders_on_dose_id"

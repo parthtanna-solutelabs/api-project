@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
     SECRET_KEY = Rails.application.secrets.secret_key_base. to_s
-
+    private
     def encode(payload, exp = 24.hours.from_now)
       payload[:exp] = exp.to_i
       JWT.encode(payload, SECRET_KEY)
@@ -10,8 +10,8 @@ class ApplicationController < ActionController::API
       decoded = JWT.decode(token, SECRET_KEY)[0]
       HashWithIndifferentAccess.new decoded
     end
-    def admin_only
-        
+
+    def admin_only  
       if !@current_user.admin?
           render json:{error:"Only admin can acccess"}, status: :unauthorized
       end
@@ -29,13 +29,10 @@ class ApplicationController < ActionController::API
         begin
           @decoded = decode(header)
           @current_user = User.find(@decoded[:user_id])
-          
         rescue ActiveRecord::RecordNotFound => e
           render json: { errors: e.message }, status: :unauthorized
         rescue JWT::DecodeError => e
           render json: { errors: e.message }, status: :unauthorized
         end
-      end
-
-      
+      end    
 end

@@ -13,9 +13,6 @@ class MedicalConditionsController < ApplicationController
 
   def get_medicines
     @medical_condition=MedicalCondition.find(params[:id])
-    session[:medical_condition_id]=@medical_condition.id
     render json: @medical_condition, show_children: true
   end
-  
-  
 end
